@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ning.mappers.CourseMapper">
+
+<!--    List<Course> allCourses();//查询所有课程 并排序-->
+        <select id="allCourses" resultType="Course">
+            select * from c_course order by sid
+        </select>
+<!--    Course selectCourse(@Param("id") Integer id);-->
+        <select id="selectCourse" resultType="Course">
+            select * from c_course where id = #{id}
+        </select>
+<!--    Integer addCourse(Course course);//新增课程-->
+        <insert id="addCourse">
+--             ALTER TABLE c_course AUTO_INCREMENT = 1
+            insert into c_course values(null,#{name},#{hours},#{sid},#{image});
+        </insert>
+<!--    Integer deleteCourse(@Param("id")Integer id);-->
+        <delete id="deleteCourse">
+            delete from c_course where id = #{id}
+        </delete>
+
+        <update id="updateCourse">
+            update c_course set name = #{name},hours=#{hours},sid = #{sid} where id= #{id}
+        </update>
+
+<!--    Course selectByName(String name);-->
+        <select id="selectByName" resultType="Course">
+            select * from c_course where name = #{name}
+        </select>
+
+</mapper>
